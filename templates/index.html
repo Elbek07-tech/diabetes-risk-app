@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>🩺 Diabetni baholash</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(120deg,#e3f2fd,#ffffff);
+    padding: 30px;
+}
+.box {
+    max-width: 620px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.15);
+}
+label { font-weight: bold; }
+small { color: #555; }
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    background: #00695c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+button:hover { background: #004d40; }
+.result { text-align: center; font-size: 18px; margin-top: 20px; }
+img { display: block; margin: 20px auto; }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h1 style="text-align:center;">🩺 Diabet xavfini baholash</h1>
+
+<form method="post">
+
+<label>💉 Insulin (µIU/mL)</label>
+<small>Norma: 2 – 25</small>
+<input type="number" step="0.1" name="insulin" required>
+
+<label>⚖️ BMI</label>
+<small>Norma: 18.5 – 24.9</small>
+<input type="number" step="0.1" name="bmi" required>
+
+<label>💓 Qon bosimi (sistolik)</label>
+<small>Norma: &lt; 120</small>
+<input type="number" step="1" name="bp" required>
+
+<label>🧪 Umumiy xolesterin (mmol/L)</label>
+<small>Norma: &lt; 5.2</small>
+<input type="number" step="0.1" name="cholesterol" required>
+
+<label>🧬 LDL xolesterin</label>
+<small>Norma: &lt; 3.0</small>
+<input type="number" step="0.1" name="ldl" required>
+
+<label>❤️ HDL xolesterin</label>
+<small>Norma: &gt; 1.0</small>
+<input type="number" step="0.1" name="hdl" required>
+
+<label>🧪 Triglitseridlar</label>
+<small>Norma: &lt; 1.7</small>
+<input type="number" step="0.1" name="triglycerides" required>
+
+<button type="submit">📊 Natijani ko‘rish</button>
+</form>
+
+{% if risk is not none %}
+<div class="result">
+<p>📌 Diabet xavfi: <b>{{ risk }}%</b></p>
+
+{% if risk < 30 %}
+<p>✅ Xavf past</p>
+{% elif risk < 60 %}
+<p>⚠️ O‘rtacha xavf</p>
+{% else %}
+<p>🚨 Yuqori xavf</p>
+{% endif %}
+</div>
+
+<img src="data:image/png;base64,{{ graph }}">
+{% endif %}
+
+</div>
+</body>
+</html>
